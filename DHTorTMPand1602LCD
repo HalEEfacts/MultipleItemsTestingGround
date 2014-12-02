@@ -40,18 +40,20 @@ void loop() {
   int t2= analogRead(sensorPin); //TMP36 sensor
 
   // converting t2 reading to voltage, for 3.3v arduino use 3.3
-  float voltage = t2 * 5.0;
+    float voltage = t2 * 5.0;
   voltage /= 1024.0; 
   float temperatureC = (voltage - 0.5) * 100 ;  //converting from 10 mv per degree wit 500 mV offset
 
+  // Setup screen
+    lcd.clear(); //Clear screen in case other info was shown
+    // set the cursor to (0,0):
+    lcd.setCursor(0, 0);
+
  {
-  if(digitalRead(buttonDHTpin) == LOW)
+  if(digitalRead(buttonDHTpin) == HIGH)
    {  
   Serial.print("DHT display");
-  // set the cursor to (0,0):
-  lcd.setCursor(0, 0);
-  // print from 0 to 9:
-
+ 
 /* TMP36 printing
 */
    lcd.print("Temp: ");
@@ -60,13 +62,9 @@ void loop() {
     delay(1000);
    }
  {
-  if(digitalRead(buttonTMPpin) == LOW)
+  if(digitalRead(buttonTMPpin) == HIGH)
    {
        Serial.print("TMP display");
-
-  // set the cursor to (0,0):
-  lcd.setCursor(0, 0);
-  // print from 0 to 9:
 
 /* DHT11 printing
 */
@@ -78,8 +76,8 @@ void loop() {
   lcd.print("Humidity: ");
   lcd.print(h);
   lcd.print("%");
-    delay(200);
-   }
-}
- }
-}
+    delay(1000);
+   } //Close TMP button loop
+}    //close if TMP button
+ } //close if loop 
+} //close void loop
