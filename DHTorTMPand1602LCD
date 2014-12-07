@@ -74,7 +74,8 @@ void loop()
    lcd.print(temperatureC);
    lcd.print("C");
     delay(1000);
-   }
+   } //Close DHT Button Loop
+ } //Close DHT Button
  {if(digitalRead(buttonTMPpin) == HIGH)
    {
    Serial.print("TMP display");
@@ -92,5 +93,4 @@ void loop()
     delay(1000);
    } //Close TMP button loop
  }    //close if TMP button
- } //close if loop 
 } //close void loop
