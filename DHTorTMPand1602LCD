@@ -1,3 +1,5 @@
+#include <Time.h>
+
 /*
 setup DHT
 */
@@ -32,12 +34,16 @@ first Run Tasks
 
 void setup() {
   Serial.begin(9600);
+  setTime(19,32,00,12,10,14); // set time to noon Jan 1 2011
   // set up the LCD's number of columns and rows: 
   lcd.begin(16,2);
   dht.begin();
   pinMode(buttonDHTpin, INPUT_PULLUP);
   pinMode(buttonTMPpin, INPUT_PULLUP);
   lcd.print("Hello");
+  lcd.setCursor(0,1);
+  lcd.print("It is ");
+  lcd.print(hour());  lcd.print(minute());lcd.print(second());
   delay(1000);
 }
 
@@ -47,7 +53,6 @@ Main Program
 
 void loop()
 {
-  
   // Reading temperature or humidity takes about 250 milliseconds!
   // Sensor readings may also be up to 2 seconds 'old' (its a very slow sensor)
   int h = dht.readHumidity();
