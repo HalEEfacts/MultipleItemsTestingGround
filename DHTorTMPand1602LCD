@@ -2,6 +2,10 @@
 
 /*
 setup DHT
+Pin 1 - VDD (5v)
+Pin2 - Data (pin defined below), 1k ohm resister to VCC
+Pin 3 - NULL
+Pin 4 - GROUND
 */
 
 #include "DHT.h"
