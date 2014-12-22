@@ -26,9 +26,7 @@ This is done with the altitude() function.
 Hardware connections:
 
 - (GND) to GND
-+ (VDD) to 3.3V
-
-(WARNING: do not connect + to 5V or the sensor will be damaged!)
++ (VDD) to 3.3V (WARNING: do not connect + to 5V or the sensor will be damaged!)
 
 You will also need to connect the I2C pins (SCL and SDA) to your
 Arduino. The pins are different on different Arduinos:
@@ -37,29 +35,18 @@ Any Arduino pins labeled:  SDA  SCL
 Uno, Redboard, Pro:        A4   A5
 Mega2560, Due:             20   21
 Leonardo:                   2    3
-
-Leave the IO (VDDIO) pin unconnected. This pin is for connecting
-the BMP180 to systems with lower logic levels such as 1.8V
-
-
-V10 Mike Grusin, SparkFun Electronics 10/24/2013
 */
 
-// Your sketch must #include this library, and the Wire library.
-// (Wire is a standard library included with Arduino.):
+// Your sketch must #include libraries to make BMP, DHT work.
 
 #include <SFE_BMP180.h>
 #include <Wire.h>
 
 /* Setup DHT
 */
-#include "DHT.h"
-#define DHTPIN 2     // what pin we're connected to
-// Uncomment whatever type you're using!
-//#define DHTTYPE DHT11   // DHT 11 
-#define DHTTYPE DHT22   // DHT 22  (AM2302)
-//#define DHTTYPE DHT21   // DHT 21 (AM2301)
-DHT dht(DHTPIN, DHTTYPE);
+#include  <DHT22.h>
+dht22 DHT22;
+
 
 /*Setup TMP36
 */
@@ -75,37 +62,48 @@ SFE_BMP180 pressure;
 void setup()
 {
   Serial.begin(9600);
-  Serial.println("REBOOT");
-  
-  // Initialize the sensor (it is important to get calibration values stored on the device).
+      
+  DHT22.attach(2); //Defines pin DHT22 is on, defaults to 2 if not entered
 
+  // Initialize the BMP180 sensor (it is important to get calibration values stored on the device).
   if (pressure.begin())
     Serial.println("BMP180 init success");
   else
   {
     // Oops, something went wrong, this is usually a connection problem,
     // see the comments at the top of this sketch for the proper connections.
-
     Serial.println("BMP180 init fail\n\n");
     while(1); // Pause forever.
   }
+  
+
+  
 }
 
 void loop()
 {
-  // Reading temperature or humidity takes about 250 milliseconds!
-  // Sensor readings may also be up to 2 seconds 'old' (its a very slow sensor)
-  int h = dht.readHumidity();
-  int t = dht.readTemperature();
-  int t2= analogRead(sensorPin); //TMP36 sensor
 
+
+  int t2= analogRead(sensorPin); //TMP36 sensor
   // converting t2 reading to voltage, for 3.3v arduino use 3.3
   float voltage = t2 * 5.0;
   voltage /= 1024.0; 
   float temperatureC = (voltage - 0.5) * 100 ;  //converting from 10 mv per degree wit 500 mV offset
   
-  char status;
+  char status; //??????
   double T,P,p0,a;
+
+  //Confrim the DHT22 is working
+  int chk = DHT22.read();
+    Serial.print("Read sensor: ");
+  switch (chk)
+  {
+    case 0: Serial.println("OK"); break;
+    case -1: Serial.println("Checksum error"); break;
+    case -2: Serial.println("Time out error"); break;
+    default: Serial.println("Unknown error"); break;
+  }
+
 
   // Output Loop here getting pressure readings every 10 seconds.
 
@@ -113,12 +111,24 @@ void loop()
   Serial.print("TMP Temp: ");
   Serial.print(temperatureC);
   Serial.println(" deg C, ");
-  Serial.print("DHT Temp: ");
-  Serial.print(t);
-  Serial.print(" deg C, ");
-  Serial.print("Humidity: ");
-  Serial.print(h);
-  Serial.println("%");
+  
+  Serial.print("DHT Temp (°C): ");
+  Serial.println((float)DHT22.temperature, DEC);
+  
+  Serial.print("Humidity (%): ");
+  Serial.println((float)DHT22.humidity, DEC);
+
+  Serial.print("Temperature (°F): ");
+  Serial.println(DHT22.fahrenheit(), DEC);
+
+  Serial.print("Temperature (°K): ");
+  Serial.println(DHT22.kelvin(), DEC);
+
+  Serial.print("Dew Point (°C): ");
+  Serial.println(DHT22.dewPoint(), DEC);
+
+  Serial.print("Dew PointFast (°C): ");
+  Serial.println(DHT22.dewPointFast(), DEC);
   
   // If you want sea-level-compensated pressure, as used in weather reports,
   // you will need to know the altitude at which your measurements are taken.
