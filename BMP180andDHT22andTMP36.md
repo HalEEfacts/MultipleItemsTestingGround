@@ -74,3 +74,8 @@ Leonardo:                   2    3
      Portions of DHTLib used for verification, and data manipulation
      
 #######################################################################*/
+
+/*
+Light Sensor info taken from:
+http://www.codingcolor.com/microcontrollers/arduino-night-light-using-a-photocell/
+*/
