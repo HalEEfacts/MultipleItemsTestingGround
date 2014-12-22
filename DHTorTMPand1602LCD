@@ -2,7 +2,7 @@
 
 /*
 setup DHT
-Pin 1 - VDD (5v)
+Pin 1 - VDD (5v/DHT22)
 Pin2 - Data (pin defined below), 1k ohm resister to VCC
 Pin 3 - NULL
 Pin 4 - GROUND
