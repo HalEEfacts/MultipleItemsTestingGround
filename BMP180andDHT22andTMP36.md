@@ -38,3 +38,39 @@ Uno, Redboard, Pro:        A4   A5
 Mega2560, Due:             20   21
 Leonardo:                   2    3
 */
+
+/*####################################################################
+ FILE: dht11_functions.pde - DHT11 Usage Demo.
+ VERSION: 2S0A
+
+ PURPOSE: Measure and return temperature & Humidity. Additionally provides conversions.
+
+ LICENSE: GPL v3 (http://www.gnu.org/licenses/gpl.html)
+ GET UPDATES: https://www.virtuabotix.com/
+
+      --##--##--##--##--##--##--##--##--##--##--
+      ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##
+      ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##
+      | ##  ##  ##  ##  ##  ##  ##  ##  ##  ## |
+      ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##
+      ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##
+      | ##  ##  ##  ##  ##  ##  ##  ##  ##  ## |
+      ##  ##  ##  ## DHT22 SENSOR ##  ##  ##  ##
+      ##  ##  ##  ##  ##FRONT ##  ##  ##  ##  ##
+      | ##  ##  ##  ##  ##  ##  ##  ##  ##  ## |
+      ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##
+      ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##
+      | ##  ##  ##  ##  ##  ##  ##  ##  ##  ## |
+      ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##
+      ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##
+      --##--##--##--##--##--##--##--##--##--##--
+          ||       ||          || (Not    ||
+          ||       ||          || Used)   ||
+        VDD(5V)   Readout(I/O)          Ground
+
+  HISTORY:
+  Joseph Dattilo (Virtuabotix LLC) - Version 1S0A (14 Sep 12)
+    -Converted from DHT11 2S0A library to work with the DHT22
+     Portions of DHTLib used for verification, and data manipulation
+     
+#######################################################################*/
