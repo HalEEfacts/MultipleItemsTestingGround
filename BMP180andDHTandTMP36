@@ -5,17 +5,19 @@
 #include  <dht22.h>
 dht22 DHT22;
 
-
 /*Setup TMP36
 */
-#include <SFE_BMP180.h>
 int sensorPin = 0; // Defines the analog pin the TMP36's Vout (sense) pin
                    // is connected to
 
+/*Setup BMP180
+*/
+#include <SFE_BMP180.h>
 SFE_BMP180 pressure; // You will need to create an SFE_BMP180 object,
                      // here called "pressure":
-
 #define ALTITUDE 69.8 // Altitude of BMP180 in meters
+
+
 
 void setup()
 {
