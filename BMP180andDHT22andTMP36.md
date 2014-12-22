@@ -1,5 +1,6 @@
 
-/*
+/* ---------BMP180------------------
+
 Like most pressure sensors, the BMP180 measures absolute pressure.
 This is the actual ambient pressure seen by the device, which will
 vary with both altitude and weather.
